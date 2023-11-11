@@ -1,0 +1,31 @@
+\subsection{Identification of the Transfer Function}
+%After estimating the frequency response at a number of distinct frequencies $\Omega_l$, the transfer function of the system can be identified.
+Given the design parameters $A$ and $B$ (number of respective coefficients) one can identify the unknown parameters $a_k$ and $b_k$ of the system's transfer function
+\begin{align*}
+	H(z) &= \frac{\sum_{k=0}^{B-1}b_kz^{-k}}{1+\sum_{k=1}^{A-1}a_kz^{-k}} & H(\Omega) = \frac{\sum_{k=0}^{B-1}b_ke^{-j\Omega k}}{1+\sum_{k=1}^{A-1}a_ke^{-j\Omega k}}
+\end{align*}
+which results in a system of $2L$ equations
+\begin{align*}
+	R_l[\cos(\theta_l) + a_1\cos(\theta_l-\Omega_l) + \hdots + a_{A-1}\cos(\theta_l-(A-1)\Omega_l)] \\ =b_0 + b_1 \cos(\Omega_l) + \hdots + b_{B-1}\cos((B-1)\Omega_l) \\
+	R_l[\sin(\theta_l) + a_1\sin(\theta_l-\Omega_l) + \hdots + a_{A-1}\sin(\theta_l-(A-1)\Omega_l)] \\ =-b_1 \sin(\Omega_l) - \hdots - b_{B-1}\sin((B-1)\Omega_l)
+\end{align*}
+This system of equations can be converted to the least squares problem of minimizing
+\begin{align*}
+	(F\Theta - G)^\top (F\Theta - G)
+\end{align*}
+where $\Theta = [a_1\quad a_2\quad\hdots\quad a_{A-1} \quad b_0 \quad b_1 \quad\hdots \quad b_{B-1}]^\top$. The LS solution yields the estimated coefficients $\Theta^*$. 
+\begin{align*}
+	\Theta^* &= (F^\top F)^{-1} F^\top G & \text{$F$ must have full rank}
+\end{align*}
+
+% \subsubsection{Experimental Procedure}
+% \begin{enumerate}
+% 	\item		Set $u_e[n] = A\cos(\Omega_ln)$ for $n = 0,\hdots,N_T+N-1$, where $N_T$ is chosen sufficiently large and $A$ scales the input such that nonlinearities are not stimulated. 
+% 	\item		Take the DFT of $u_e$ and $y_m$ in the time period $n = N_T,\hdots,N_T+N-1$.
+% 	\item		The frequency response estimate at the frequency $\Omega_l$ is then given by
+% 			\begin{align*}
+% 				\widehat{H}(\Omega_l) \vcentcolon= \frac{Y_m[l]}{U_e[l]}
+% 			\end{align*}
+% 	\item		Repeat this for the frequencies of interest by picking the appropriate integer $l$.
+% \end{enumerate}
+% Note that because the system is real, we only need to identify the frequency response for $0 \leq \Omega \leq \pi$ as we have $H(-\Omega) = H^*(\Omega)$. Therefore pick $l\in(0,(N-1)/2)$ if $N$ is odd, $l \in (0,N/2)$ if $N$ is even.

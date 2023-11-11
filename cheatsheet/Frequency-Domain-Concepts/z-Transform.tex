@@ -1,0 +1,71 @@
+\subsection{The z-Transform}
+    Given a sequence $x[n]$, its z-transform $X(z)$ is defined as
+    \begin{align*}
+        X(z) \vcentcolon= \sum\limits_{n = -\infty}^\infty x[n] z^{-n}, \quad z \in \mathbb{C}
+    \end{align*}
+    The z-transform has the following properties:
+    \begin{align*}
+        &\text{\bf Accumulation} & \sum_{k = -\infty}^n x[k] &\leftrightarrow \frac{z}{z-1}X(z) \\
+        &\text{\bf Linearity} & \alpha_1x_1[n] + \alpha_2x_2[n] &\leftrightarrow \alpha_1X_1(z) + \alpha_2X_2(z) \\[2pt]
+        &\text{\bf Convolution} & \{x_1[n]\} \conv \{x_2[n]\} &\leftrightarrow X_1(z)\cdot X_2(z) \\
+        % &\text{\bf Time-shifting} & x[n-1] \leftrightarrow z^{-1}X(z)& \hspace{2.5em} x[n+1] \leftrightarrow zX(z)
+        &\text{\bf Time-shifting} &  x[n+\alpha] &\leftrightarrow z^\alpha X(z)
+    \end{align*}
+
+\subsubsection{Common z-Transform Pairs}
+    \vspace{-1em}
+    \begin{align*}
+        \delta[n] &\longleftrightarrow 1 & s[n] &\longleftrightarrow \tfrac{z}{z-1}\\
+        \delta[n-n_0] &\longleftrightarrow z^{-n_0} & n \cdot x[n] &\longleftrightarrow - z \cdot \frac{d}{dz} X(z)\\  %n\cdot s[n] &\longleftrightarrow \tfrac{z}{(z-1)^2}\\
+        x[-n] &\longleftrightarrow X\!\!\left(\tfrac{1}{z}\right) & x^*[n] &\longleftrightarrow X^*[z^*] \\
+        x[n-n_0] &\longleftrightarrow z^{-n_0}X(z) & n_0^nx[n] &\longleftrightarrow X\!\!\left(\tfrac{z}{n_0}\right)
+    \end{align*}
+
+\subsubsection{Region of Convergence (ROC)}
+    %The region of convergence of a causal LTI system extends outward from the largest magnitude pole.
+    The ROC must not contain any poles. If the system is stable (no poles with $|p_i| = 1$), the ROC must contain the unit circle.
+
+\subsubsection{Transfer Functions}
+    For an LTI system with impulse response $\{h[n] \}$ we have
+    \begin{align*}
+        \{y[n]\} = \{u[n]\}\conv\{h[n]\} \longleftrightarrow Y(z) =  H(z) U(z)&& H(z) = \frac{Y(z)}{U(z)}
+    \end{align*}
+    and call $H(z)$ the transfer function of the system.\\ It can also be easily derived from LCCDEs:
+    \mathbox{
+        H(z) = \frac{b_0 + b_1 z^{-1} + \hdots + b_Mz^{-M}}{a_0 + a_1z^{-1} + \hdots + a_Nz^{-N}}
+    }
+
+\subsubsection{Transfer Functions in Discrete-Time}
+    The following relationship between input and output holds true:
+    \begin{align*}
+        q &= (z \mathbb{I} - A_d)^{-1} \cdot B_d \cdot u \\
+        y &= (C_d \cdot (z \mathbb{I} - A_d)^{-1} \cdot B_d + D_d) \cdot u
+    \end{align*}
+    \vspace{-7pt}
+    \mathbox{
+        H(z) = C_d(z \mathbb{I} - A_d)^{-1} B_d + D_d
+    }
+    % We therefore define the transfer function $H(z)$ to be:
+    % \begin{align*}
+    %     H(z) &\vcentcolon= \frac{y}{u} = C_d(z \mathbb{I} - A_d)^{-1} B_d + D_d \\[-1pt]
+    %     % & \phantom{:}= \frac{b_0 + b_1 z^{-1} + \hdots + b_Mz^{-M}}{a_0 + a_1z^{-1} + \hdots + a_Nz^{-N}}
+    % \end{align*}
+% \subsubsection{Causal Stability Theorem}
+%     There exists a \textbf{stable and causal} interpretation of a system iff its TF $H(z)$ has all poles \textit{inside the unit circle}.
+% \subsubsection{Non-Causal System Theorem}
+%     There exists a \textbf{stable}, but not necessarily causal interpretation iff the TF $H(z)$ has \textbf{no} poles \textit{on the unit circle}.
+\subsubsection{Causality-Stability Theorem}
+        System with TF $H(z)$ and poles $p_i$ is:
+        \begin{itemize}
+            \item \textbf{stable} iff: $p_i$ \underline{not} on the unit circle
+            \item \textbf{causal and stable} iff: $p_i$ within unit circle
+        \end{itemize}
+\subsubsection{Complex Exponential}
+    \vspace{0.5em}
+    \mathbox{
+        \{y[n]\} = G\{z^n_0\} = H(z_0) \{z_0^n\}
+    }
+    $$
+        y[n] = \abs{H(\Omega_0)} \cdot e^{j(\Omega_0 n +  \angle H(\Omega_0))}
+    $$
+    \vspace{-1em}

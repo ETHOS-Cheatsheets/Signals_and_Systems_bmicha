@@ -1,0 +1,33 @@
+\subsection{Discrete Fourier Transform (DFT)}
+\subsubsection{Definition}
+The DFT coefficients of a signal are the DFS coefficients of the signal's periodic extension. For $k,n = 0, \hdots, N-1$
+\begin{align*}
+	x[n] &= \frac{1}{N}\!\!\sum\limits_{k=0}^{N-1}\!\!X[k]e^{j k \frac{2\pi}{N} n} & X[k] &=\!\!\!\! \sum\limits_{n=0}^{N-1} \!\! x[n]e^{-j k \frac{2\pi}{N} n}
+\end{align*}
+The CT frequency $f_k$ that belongs to $X[k]$ is calculated as $f_k = k\cdot f_s / N$.
+
+% \subsubsection{Fast Fourier Transform (FFT)}
+% $N$ even, $x_0[n] = x[2n]$, $x_1[n] = x[2n+1]$, $n = 0, \hdots, N/2-1$:
+% \begin{align*}
+% 	X_0[k] &= \!\!\!\!\!\sum\limits_{n=0}^{N/2-1}\!\!\!\!\! x[2n]W_N^{2kn} & \!\!\!X_1[k] &=\!\!\!\!\! \sum\limits_{n=0}^{N/2-1}\!\!\!\!\! x[2n+1]W_N^{(2n+1)k}W_N^{-k} \\
+% 	W_N&\vcentcolon= e^{-j\frac{2\pi}{N}} & X[k] &= X_0[k] + W_N^kX_1[k] &
+% \end{align*}
+
+\subsection{Effect of Causal Inputs}
+    $$
+        u[n] = \begin{cases}
+            e^{j\Omega n} & n \geq 0\\
+            0 & n < 0
+        \end{cases}
+    $$
+    Let the \textbf{LTI} system $G$ be \textbf{stable} and let $y = G u$. Then
+    $$
+        y[n] \to H(z=e^{j\Omega}) \cdot e^{j\Omega n} \qquad as \ n \to \infty
+    $$
+
+\subsection{Aliasing}
+Aliasing is the effect of multiple CT frequencies mapping to the same DT frequency.
+% It is avoided by ensuring that all the signal's frequency content is in the range $\abs{\omega} < \frac{\pi}{T_s}$ (i.e. below the Nyquist frequency / half the sampling frequency).
+It is avoided by ensuring that all the signal's frequency content is below the \textbf{Nyquist frequency} / half the sampling frequency:
+$$\abs{\omega} < \frac{\pi}{T_s}$$
+

@@ -1,0 +1,66 @@
+\subsection{Discrete-Time Fourier Transform (DTFT) \texorpdfstring{\hfill $\ft$}{ft}}
+    The Fourier Transform is the $z$-Transform for $z=e^{j \Omega}$.
+    \subsubsection{Definition}
+        The Fourier Transform $X$ of a DT signal $x$ is defined as
+        \begin{align*}
+            X(\Omega) \vcentcolon= \sum\limits_{n = -\infty}^\infty x[n] \cdot e^{-j\Omega n} && x[n] \longleftrightarrow X(\Omega) && X = \ft x
+        \end{align*}
+
+    \subsubsection{Inverse Discrete-Time Fourier Transform (IDTFT)}
+        The Fourier Transform operator $\ft$ is invertible:
+        \begin{align*}
+            \{x[n]\} = \ft^{-1} X \vcentcolon= \Bigl\{ \frac{1}{2\pi}\int\limits_{-\pi}^\pi X(\Omega) \cdot e^{j\Omega n}\, \dd\Omega \Bigr\}
+        \end{align*}
+
+    \subsubsection{Properties of the FT}
+        \vspace{-1em}
+        \begin{align*}
+            &\text{\bf Linearity} & \alpha_1x_1[n] + \alpha_2x_2[n] &\leftrightarrow \alpha_1X_1(\Omega) + \alpha_2X_2(\Omega) \\
+            &\text{\bf Convolution} & \{x_1[n]\} \conv \{x_2[n]\} &\leftrightarrow X_1(\Omega)\cdot X_2(\Omega) \\
+            &\text{\bf Parseval} & \sum\limits_{n = -\infty}^\infty \abs{x[n]}^2 &= \frac{1}{2\pi} \int\limits_{-\pi}^\pi \abs{X(\Omega)}^2 \dd \Omega
+        \end{align*}
+
+    \subsubsection{Common DTFT Pairs}
+        \vspace{-1em}
+        \begin{align*}
+            e^{j \Omega_0 n} &\longleftrightarrow 2\pi\delta(\Omega-\Omega_0) & \delta[n-n_0] &\longleftrightarrow e^{-j\Omega n_0}\\
+            x[n-n_0] &\longleftrightarrow e^{-j\Omega n_0} X(\Omega) & x[-n] &\longleftrightarrow X(-\Omega)
+        \end{align*}
+
+    \subsubsection{Frequency Response of LTI Systems} 
+        For an LTI system with impulse response $h$ we have
+        \begin{align*}
+            y = u\conv h \longleftrightarrow Y(\Omega) = H(\Omega)U(\Omega) && \therefore H(\Omega) = \frac{Y(\Omega)}{U(\Omega)}
+        \end{align*}
+        % yielding this result for the magnitude and phase of $Y(\Omega)$:
+        % \begin{align*}
+        %     \abs{Y(\Omega)} &= \abs{U(\Omega)}\abs{H(\Omega)} && \Theta_Y(\Omega) = \Theta_U(\Omega) + \Theta_H(\Omega)
+        % \end{align*}
+        We can obtain $H(\Omega)$ from $H(z)$ or the LCCDE:
+        \mathbox{
+            H(\Omega) = \bigl. H(z) \bigr|_{z = e^{j \Omega}}
+        }
+        \mathbox{
+            H(\Omega) = \frac{b_0 + b_1 e^{-j\Omega} + \hdots + b_Me^{-Mj\Omega}}{a_0 + a_1e^{-j\Omega} + \hdots + a_Ne^{-Nj\Omega}}
+        }
+
+    \subsubsection{Response to Complex Exponential}
+        If the input $u$ to an LTI system $G$ is a complex exponential:
+        \begin{align*}
+            y[n] = \abs{H(\Omega_0)} \cdot e^{j(\Omega_0 n +  \angle H(\Omega_0))}
+        \end{align*}
+        This is only valid if the input sequence is applied for all time.
+
+    % \subsubsection{Response to Causal Complex Exponential}
+    %     Let the LTI system $G$ be stable and let $y = Gu$. Then
+    %     \begin{align*}
+    %         u[n] &= \begin{cases}e^{j \Omega n} & n\geq 0 \\ 0 & n < 0\end{cases} & y[n] \to H(e^{j \Omega})e^{j\Omega n} \text{ as } n\to \infty
+    %     \end{align*}
+
+    \subsubsection{Response to Real Sinusoids}
+        Let $u[n] = A\cos(\Omega_0 n + \phi)$. The real part of the input affects the real part of the output:
+        \begin{align*}
+            y[n] = \abs{H(\Omega_0)}A\cos(\Omega_0 n + \phi + \angle H(\Omega_0))
+        \end{align*}
+        This is only valid if the input sequence is applied for all time.
+        % See Exam 2013 Problem 1

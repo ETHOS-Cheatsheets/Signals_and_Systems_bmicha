@@ -1,0 +1,30 @@
+% !TeX root = ../ZF_strubma-bmicha_SaS.tex
+\subsection{Discrete Fourier Series (DFS)  \texorpdfstring{\hfill $\ft_s$}{}}
+    \subsubsection{Definition}
+        The DFS is a different representation of signal $x$ with period $N$
+        \begin{align*}
+            x[n] &= \frac{1}{N} \sum\limits_{k=0}^{N-1} X[k]e^{jk \Omega_0 n} & X[k] &= \sum\limits_{n=0}^{N-1} x[n]e^{-jk \Omega_0 n}
+        \end{align*}
+        where $\Omega_0 \vcentcolon= \frac{2\pi}{N}$. \textit{Note:} $X[k]$ is also periodic with period $N$. 
+
+    \subsubsection{Properties of the DFS}
+        \vspace{-1em}
+        \begin{align*}
+            &\text{\bf Linearity} & \alpha_1x_1[n] + \alpha_2x_2[n] &\leftrightarrow \alpha_1X_1[k] + \alpha_2X_2[k] \\
+            &\text{\bf Parseval} & \sum\limits_{n = 0}^{N-1} \abs{x[n]}^2 &= \frac{1}{N} \sum\limits_{k=0}^{N-1} \abs{X[k]}^2\\
+            &\text{\bf Real Signals} & X[N-\alpha] &= X^*[\alpha] \quad (x[n] \in \mathbb{R})
+        \end{align*}
+
+    \subsubsection{Response to Complex Exponential Sequences}
+        % The output sequence's DFS coefficients $Y[k]$ are related to the DFS coefficients of the input $U[k]$ by the system's transfer function $H(z)$, sampled at $z = e^{jk \Omega_0}$:
+        \vspace{-1em}
+        \begin{align*}
+            \boxed{Y[k] = H\left(e^{jk \Omega_0}\right) \cdot U[k]} && H\left(e^{jk \Omega_0}\right) = H(z) \bigr|_{z = e^{jk \Omega_0}}
+        \end{align*}
+
+    \subsubsection{DFS \texorpdfstring{$\leftrightarrow$}{<->} DTFT}
+        \vspace{-1.5em}
+        \begin{align*}
+            X(\Omega) = \frac{2\pi}{N}\sum\limits_{k=0}^{N-1}X[k] \cdot \delta(\Omega-k\Omega_0)
+        \end{align*}
+        \vspace{-1em}

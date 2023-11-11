@@ -1,0 +1,61 @@
+%!Tex root=ZF_bmicha_SaS.tex
+\section{Infinite Impulse Response (IIR) Filters}
+IIR filters have an LCCDE of the form
+\begin{align*}
+	y[n] &= \sum_{k=0}^{M-1} b_ku[n-k]-\sum_{k=1}^{N-1} a_k y[n-k]
+\end{align*}
+The filter order is given by $\text{max}(M-1,N-1)$ and is the size of the state in a state-space description of the system.
+
+\subsubsection{Transfer Function and Frequency Response}
+\vspace{-1em}
+\begin{align*}
+	H(z) &= \frac{\sum_{k=0}^{M-1}b_kz^{-k}}{1+\sum_{k=1}^{N-1}a_kz^{-k}} & H(\Omega) &= \frac{\sum_{k=0}^{M-1}b_ke^{-j\Omega k}}{1+\sum_{k=1}^{N-1}a_ke^{-j\Omega k}}
+\end{align*}
+
+\subsection{First-Order Low-Pass Filter}
+First-order, low-pass, causal IIR Filters have the LCCDE
+\begin{align*}
+	y[n] &= \alpha y[n-1] + (1-\alpha)u[n]
+\end{align*}
+and are stable if $0\leq \alpha < 1$.
+
+\subsubsection{Transfer Function and Frequency Response}
+\vspace{-1em}
+\begin{align*}
+	H(z) &= \frac{1-\alpha}{1-\alpha z^{-1}} & H(\Omega) &= \frac{1-\alpha}{1-\alpha e^{-j\Omega}}
+\end{align*}
+
+\subsubsection{Decay Time}
+Time $T_0$ to reach the value $e^{-1}$. Assume $y[0] = 1$ and $u[n] = 0$.
+\begin{align*}
+	\alpha &= e^{-\frac{T_s}{T_0}} \approx 1-\frac{T_s}{T_0} \quad T_0\gg T_s
+\end{align*}
+Longer Decay Time results in faster magnitude decrease w.r.t. frequency.
+
+\subsection{Butterworth Filter Design (Low-Pass)}
+The CT frequency response with cutoff frequency at 1 rad/sec
+\begin{align*}
+	R(\omega) &= \frac{1}{\sqrt{1+\omega^{2K}}}
+\end{align*}
+where $K$ is the order of the filter, serves as starting point.
+
+\subsubsection{Transfer Function}
+The only stable TF that has the above frequency response is
+\begin{align*}
+	H(s) &= \left(\prod\limits_{k = 1}^{K} (s-s_k)\right)^{-1} & s_k &= e^{\frac{j(2k + K -1)\pi}{2K}}
+\end{align*}
+
+\subsubsection{Cutoff Frequency Specification}
+Get desired cutoff frequency $\omega_c$ by substitution:
+\begin{align*}
+	s \to \frac{s}{\omega_c}
+\end{align*}
+
+\subsubsection{Second-Order Butterworth Low-Pass Filter}
+A second-order ($K=2$) Butterworth filter yields
+\begin{align*}
+	s_1 &= e^{j 3\pi/4} = \frac{-1+j}{\sqrt{2}} & s_2 &= e^{j 5 \pi/4} = \frac{-1-j}{\sqrt{2}}
+\end{align*}
+\begin{align*}
+	H(s) &= \frac{\omega_c^2}{s^2+\sqrt{2} \omega_c s + \omega_c^2}
+\end{align*}

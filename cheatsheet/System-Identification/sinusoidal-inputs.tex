@@ -1,0 +1,25 @@
+\subsection{Identification using Sinusoidal Inputs}
+Consider the case where measurement noise corrupts the output
+\begin{align*}
+	y_m &= Gu_e+y_d
+\end{align*}
+Let $u_e[n] = \textrm{exp}(j (2\pi / N) nl)$ for $n = 0,1,\hdots,N_T+N-1$, with $l$ integer, be a sinusoid with frequency $\Omega_l = 2\pi l/N$, let $y_e = Gu_e$, and let $N_T$ be sufficiently large such that the transient has decayed adequately. Since G is stable and $u_e$ is an eigenfunction of any LTI system
+\begin{align*}
+	y_e[n] = H(\Omega_l)u_e[n] + e_e[n], \qquad n\geq N_T
+\end{align*}
+where, for a fixed value of $N$, $e_e[n] \to 0$ as $N_T\to \infty$. Therefore the transient approaches $0$ and the output of the system converges to a shifted and scaled version of the input sinusoid.
+
+\subsubsection{Frequency Response}
+Taking the DFT of $y_e, e_e$ and $u_e$ yields
+\begin{align*}
+	Y_e[l] = H(\Omega_l) U_e[l] + E_e[l]
+\end{align*}
+where $E_e[l] \to 0$ as $N_T\to \infty$. Note that $U_e[l] = N$ since all the energy is concentrated at one frequency. The frequency response can be estimated
+\begin{align*}
+	\widehat{H}(\Omega_l) \vcentcolon= \frac{Y_m[l]}{U_e[l]} = H(\Omega_l) + \frac{E_e[l]}{N} + \frac{Y_d[l]}{N}
+\end{align*}
+where 
+\begin{align*}
+	Y_m[l] &= \hspace*{-1em}\sum_{n=N_T}^{N_T+N-1}\hspace*{-1em}y_m[n]e^{-j\frac{2\pi}{N}ln} & Y_d[l] &= \hspace*{-1em}\sum_{n=N_T}^{N_T+N-1}\hspace*{-1em}y_d[n]e^{-j\frac{2\pi}{N}ln}
+\end{align*}
+The same results apply to closed loop systems.
