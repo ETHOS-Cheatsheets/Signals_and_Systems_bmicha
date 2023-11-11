@@ -1,0 +1,18 @@
+\subsection{Identification based on Impulse Responses}
+\subsubsection{Without Noise}
+In the absence of noise and with $\{u_e[n]\} = \{\delta[n]\}$ we have that
+\begin{align*}
+	\{y[n]\} &= \{h[n]\} & H(\Omega) &= \sum_{n=0}^{\infty} y_m[n]e^{-j\Omega n}
+\end{align*}
+Since most systems have an infinite impulse response, we collect $N$ pieces of data and then take the DFT:
+\begin{align*}
+	Y_m[k] &= \sum_{n=0}^{N-1} y_m[n] e^{-j\Omega_k n}
+\end{align*}
+At the discrete frequency $\Omega_k = 2\pi k/N$ where $k = 0,1,\hdots,N-1$, the frequency response estimate $\widehat{H}(\Omega_k)$ then becomes
+\begin{align*}
+	\widehat{H}(\Omega_k) \vcentcolon= Y_m[k] = H(\Omega_k) - \underbrace{\sum_{n=N}^{\infty}h[n]e^{-j\Omega_k n}}_{H_N(\Omega_k)}
+\end{align*} 
+Note that the error $H_N(\Omega_k) \to 0$ as $N\to\infty$ since G is stable.
+
+\subsubsection{With Noise}
+Using an impulse as input yields unsatisfactory results if noise is present since the mean squared error of the estimate approaches infinity as the length of the sample increases.

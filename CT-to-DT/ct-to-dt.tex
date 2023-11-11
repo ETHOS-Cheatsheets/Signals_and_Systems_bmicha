@@ -1,0 +1,54 @@
+\subsubsection{Discretization of CT LTI Systems}
+    Consider the discretization of the following CT system
+    \begin{align*}
+        \dot{q}(t) &= A_c q(t) + B_c u(t) & q(0) &= q[0]\\
+        y(t) &= C_c q(t) + D_c u(t) & u(0) &= u[0]
+    \end{align*}
+    \begin{itemize}
+        \item		{\bf Forward Euler Method} approximates derivatives as:
+                \begin{align*}
+                    \dot{p}(t) &\!\approx\! \frac{p(t\!+\!T_s)\!-\!p(t)}{T_s} & \ddot{p}(t) &\!\approx\! \frac{p(t\!+\!2T_s)\!-\!2p(t\!+\!T_s)\!+\!p(t)}{T_s^2}
+                \end{align*}
+        \item		{\bf Exact Discretization} defines the following \textbf{quadratic} $M$:
+                \begin{align*}
+                    M \vcentcolon= 
+                        \begin{bmatrix}
+                            A_c & B_c \\ \underline{0} & \underline{0}
+                        \end{bmatrix} 
+                    \qquad F = 
+                        \begin{bmatrix} 
+                            F_{11} & F_{12} \\ \underline{0} & \mathbb{I}
+                        \end{bmatrix} \vcentcolon= e^{MT_s} \\
+                    A_d \vcentcolon= F_{11} \qquad B_d \vcentcolon= F_{12} \qquad C_d \vcentcolon= C_c \qquad D_d \vcentcolon= D_c
+                \end{align*}
+                to obtain the exact DT state-space description
+                \begin{align*}
+                    q[n+1] &= A_dq[n] + B_du[n] &
+                    y[n] &= C_dq[n] + D_du[n]
+                \end{align*}
+    \end{itemize}
+
+    % \newcommand{\z}{\boldsymbol{z}}
+
+    % \subsubsection{$\z$ Operator}
+    % The $\z$ operator acts on a sequence $x$ such that
+    % \begin{align*}
+    %     (\z^a x)[n] = x[n+a] \quad \forall n
+    % \end{align*}
+    % %and enables us to write a state-space description as follows:
+    % %\begin{align*}
+    % %	\z q &= A_dq + B_du\\
+    % %	y &= C_dq + D_du
+    % %\end{align*}
+
+    % \subsubsection{Transfer Functions in Discrete-Time}
+    % The following relationship between input and output holds true:
+    % \begin{align*}
+    %     q &= (\z I - A_d)^{-1} \cdot B_d \cdot u \\
+    %     y &= (C_d \cdot (\z I - A_d)^{-1} \cdot B_d + D_d) \cdot u
+    % \end{align*}
+    % We therefore define the transfer function $H(\z)$ to be:
+    % \begin{align*}
+    %     H(\z) &\vcentcolon= \frac{y}{u} = C_d(\z I - A_d)^{-1} B_d + D_d \\[-1pt]
+    %     & \phantom{:}= \frac{b_0 + b_1 \z^{-1} + \hdots + b_M\z^{-M}}{a_0 + a_1\z^{-1} + \hdots + a_N\z^{-N}}
+    % \end{align*}

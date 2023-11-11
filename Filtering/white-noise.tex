@@ -1,0 +1,14 @@
+\subsubsection{Probability Density Function, Expected Value, Variance}
+Let $x\in\mathbb{R}$ be a scalar continuous random variable with PDF $p(x)$. Consider the following definitions:
+$$
+\int\limits_{-\infty}^\infty \!\!p(x) \ d x = 1  \quad \mathrm{E}(x)\! \vcentcolon=\!\!\! \int\limits_{-\infty}^\infty\!\!\! xp(x)\ d x  \quad \mathrm{Var}(x)\!\vcentcolon= \mathrm{E}\!\left(\!(x-\mathrm{E}(x))^2 \right)
+$$
+\vfill \null \columnbreak
+\subsubsection{Definition of White Noise}
+White noise is essentially a signal $d[n]$ with a flat spectrum. In mathematical terms $d[n]$ has to satisfy for $n = 0, \hdots, N-1$:
+\begin{align*}
+	\mathrm{E}(d[n]) = 0 && \mathrm{Var}(d[n]) = 1 && \mathrm{E}(d[n] d[l]) = \begin{cases}0 & n\neq l \\ 1 & n = l\end{cases}
+\end{align*}
+
+\subsubsection{Phase Delay of a Filter}
+Phase delay $-\angle H(\Omega)/\Omega$ of a filter states how many samples a sinusoid at frequency $\Omega$ is delayed by the filter. If $\angle H(\Omega)$ is linear in $\Omega$, the filter is said to have linear phase and the phase delay of the filter is constant.

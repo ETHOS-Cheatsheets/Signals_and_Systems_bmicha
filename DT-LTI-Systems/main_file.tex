@@ -1,0 +1,51 @@
+\subsubsection{DT Classification}
+    \begin{itemize}
+        \item		{\bf Memoryless (LTI: $\boldsymbol{h[n] = 0 \,\, \forall n \neq 0}$)} output at $n$ only depends on input at same timestep: $y[n] = f_n(u[n])$
+        \item		{\bf Causal (LTI: $\boldsymbol{ h[n] = 0 \,\, \forall n < 0}$)} output $y[n]$ only depends on present and past inputs $u[k], k \leq n$.\\
+                    If a system and its input sequence are both causal, the output sequence will also be causal.
+        \item		{\bf Linear} $G\{\alpha_1u_1[n] + \alpha_2u_2[n]\} = \alpha_1G\{u_1[n]\} + \alpha_2G\{u_2[n]\}$ $ \forall\ \{u_1[n]\}, \{u_2[n]\}$ and $\forall \ \alpha_1,\alpha_2$.
+        \item		{\bf Time-invariant} same output to same input at any time.\\ ${u_2[n]} = {u_1[n-k]} \Rightarrow {y_2[n]} = {y_1[n-k]}$  % Delay in input $\rightarrow $ equal delay in output. $G\{u[n-k]\} = y[n-k]$
+        \item		{\bf Stable (LTI: $\boldsymbol{\sum \abs{h[n]} < \infty}$, ROC contains unit circle)} if there exists a finite value $M$, such that for all input sequences $u$ bounded by $1$, the output sequence $y$ is bounded by $M$ (BIBO stability).
+    \end{itemize}
+\subsubsection{Definitions of useful DT signals}
+    \begin{center}
+        \renewcommand{\tabcolsep}{10pt}
+        \renewcommand{\arraystretch}{1.6}
+        \begin{tabular}{cc}
+            \bf Unit Impulse Sequence & \bf Unit Step Sequence \\
+            $\delta[n] \vcentcolon= \begin{cases}1 & n = 0 \\ 0 & n \neq 0\end{cases}$ & $s[n] \vcentcolon= \begin{cases} 1 & n \geq 0 \\ 0 & n < 0 \end{cases}$\\
+            % \phantom{$\delta[n] \vcentcolon \quad\ \, $}$ = s[n] - s[n-1]$ & \phantom{$s[n]\, $} = $\sum\limits_{k=-\infty}^n \delta[k]$
+        \end{tabular}
+    \end{center}
+    \textbf{Signal Representation}
+        $$
+            \{x[n]\} = \sum\limits_{k=-\infty}^{\infty} x[k] \cdot \{\delta[n-k]\} \quad \forall n
+        $$
+\subsubsection{Convolution}
+    % The convolution between two sequences $x$ and $h$ is denoted as $x \conv h$ and is defined as:
+    \vspace{-1em}
+    \begin{align*}
+        x \conv h = \{x[n]\} \conv \{ h[n] \} \vcentcolon= \sum\limits_{k = -\infty}^\infty x[k] \{ h[n - k] \}
+    \end{align*}
+    commutative, associative and distributive\\ $\rightarrow$ Order in which LTI systems are cascaded does not matter.
+\subsubsection{Response to Arbitrary Inputs \texorpdfstring{$\{y[n]\}$}{y[n]}}
+    $\{ h[n] \} =  G\{\delta[n]\}$ being output given a unit impulse input.
+    % Given that $\{ y[n] \} = G\{u[n]\}$:
+    \begin{align*}
+        \{y[n]\} = G\{u[n]\} = \{u[n]\}\conv\{h[n]\} = \sum\limits_{k=-\infty}^\infty u[k]\{ h[n-k]\}
+    \end{align*}
+\subsubsection{Step response \texorpdfstring{$r[n]$}{r[n]}}
+    \vspace{-1em}
+    $$
+        r[n] = G(s[n]) = G\left(\sum \delta[n]\right) \overset{L}{=} \sum\limits_{k=-\infty}^n h[n]
+    $$
+    $$
+        r[n] - r[n-1] = h[n]
+    $$
+\subsubsection{Finite and Infinite Impulse Response}
+    Causal systems have a \textbf{finite impulse response (FIR)} if:
+    \begin{align*}
+        \exists N \in \mathbb{Z}, \textrm{ s.t. } \quad \boxed{h[n] = 0 \quad \forall n\geq N}
+    \end{align*}
+    Otherwise it has an \textbf{infinite impulse response (IIR)}.
+

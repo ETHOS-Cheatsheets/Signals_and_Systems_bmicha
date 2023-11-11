@@ -1,0 +1,37 @@
+\subsection{Linear Constant-Coefficient Difference Equations}
+    \subsubsection{Definition}
+        LCCDE systems are by definition \textbf{linear} and \textbf{time-invariant}.
+        \begin{align*}
+            \sum\limits_{k=0}^N a_ky[n-k] = \sum\limits_{k=0}^M b_k u[n-k], \quad a_k, b_k \in \mathbb{R}
+        \end{align*}
+
+    \subsubsection{Recursive Definition}
+        Assuming the system is causal (\& $a_0 \neq 0$) one can find the recursive definition:
+        \begin{align*}
+            y[n] = \frac{1}{a_0} \left(\sum\limits_{k=0}^M b_ku[n-k] - \sum\limits_{k=1}^N a_k y[n-k]\right)
+        \end{align*}
+
+    \subsubsection{LCCDE \texorpdfstring{$\rightarrow$}{<->} State-Space}
+        This class will mainly consider SISO systems, where the following holds true:
+        \begin{align*}
+            A &=\begin{bmatrix}
+                    0 & 1 & 0 & \cdots & 0 \\ 0 & 0 & 1 & \cdots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & 0 & \cdots & 1 \\ -a_N & -a_{N-1} & -a_{N-2} & \cdots & -a_1
+                \end{bmatrix}  
+            &B&=\begin{bmatrix} 
+                    0 \\ 0 \\ \vdots \\ 0 \\ b_0 
+                \end{bmatrix}\\
+            C &=\,
+                \begin{bmatrix}
+                    -a_N & -a_{N-1} & -a_{N-2} & \cdots & -a_1 
+                \end{bmatrix}
+            & D&= \phantom{:}
+                \begin{bmatrix}
+                    b_0
+                \end{bmatrix}
+        \end{align*}
+
+    \subsubsection{State-Space \texorpdfstring{$\rightarrow$}{<->} Impulse Response}
+       System with zero initial conditions ($q[n] = 0 \quad \forall n \leq 0$) has \\ impulse response:
+        \begin{align*}
+            h = \{ D , CB , CAB , \cdots , CA^{n-1}B , \cdots \}
+        \end{align*}

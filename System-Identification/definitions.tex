@@ -1,0 +1,43 @@
+%This course focuses on the black-box identification of a causal LTI system G in the frequency domain.
+\tikzstyle{block} = [draw, rectangle, fill = white, minimum height=2em, minimum width=3em]
+\tikzstyle{dynblock} = [draw, rectangle, fill = white, minimum height=2em, minimum width=3em, drop shadow = {black, opacity = 1, shadow xshift = 1pt, shadow yshift = -1pt}]
+\tikzstyle{smallblock} = [draw, rectangle, minimum height=2em, minimum width=2em]
+\tikzstyle{integrator} = [draw, rectangle, minimum height=2em, minimum width=2em, label = {center:$\int$}]
+\tikzstyle{sum} = [draw, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{feedback} = [coordinate]
+\tikzstyle{dist} = [coordinate]
+\tikzstyle{coord} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+\begin{center}
+    \resizebox{!}{3.6em}{%
+        \begin{tikzpicture}[auto, node distance = 2cm, >=latex',place/.style={rectangle,draw=black,thick}]
+            \node[input] (input) {};
+            \node[sum, right = .9cm of input] (sum1) {};
+            \node[block, right = .9cm of sum1] (G) {G};
+            \node[sum, right = .9cm of G] (sum2) {};
+            \node[output, right = .9cm of sum2] (output) {};
+            \node[coord, above = .5cm of sum1] (ud) {};
+            \node[coord, above = .5cm of sum2] (yd) {};
+
+            \draw[->] (input) --node[below]{$u_e$} (sum1);
+            \draw[->] (sum1) -- (G);
+            \draw[->] (G) --node[below]{$y$} (sum2);
+            \draw[->] (sum2) --node[below]{$y_m$} (output);
+            \draw[->] (ud) --node[right]{$u_d$} (sum1);
+            \draw[->] (yd) --node[right]{$y_d$} (sum2);
+        \end{tikzpicture}
+    }
+
+\end{center}
+\vspace*{-.5em}
+\begin{itemize}
+    \item		$u_e$ is a known input, G is causal, stable and LTI
+    \item		$u_d$ is an unknown process noise, assumed to be white
+    \item		$y_d$ is an unknown measurement noise, assumed to be white
+    \item		$y_m$ is the measurement of the systems output, which is corrupted by process and measurement noise:
+            \begin{align*}
+                y_m &= Gu_e + y_d + Gu_d
+            \end{align*}
+\end{itemize}

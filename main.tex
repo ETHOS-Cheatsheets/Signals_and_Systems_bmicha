@@ -1,14 +1,58 @@
-\documentclass{cheatsheet}
-\usepackage{bm}
-\usepackage{textcomp, mathcomp}
-\usepackage{empheq}
-\usepackage{pbox}
-\usepackage{booktabs}
+\documentclass{mpscheatsheet}
+\usepackage{amsmath, amssymb, mathtools, physics}
 
-\doctitle{... Cheatsheet}
-\author{AUTHOR \\ \vspace*{-0.2em}}
+\usepackage{tikz}
+	\tikzset{>=latex}
+	\usetikzlibrary{patterns, shapes, arrows}
+	\usetikzlibrary{positioning, fit}
+    \usetikzlibrary{decorations.markings}
+
+% NEW COMMANDS
+\newcommand{\conv}{\!\ast\!}
+\newcommand{\mathbox}[1]{
+    \begin{center}%
+        \boxed{#1}%
+    \end{center}%
+}
+\newcommand{\ft}{\mathcal{F}}
+
+% OTHER
+\setcounter{secnumdepth}{0} % disable counting
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\author{Marlin Strub \& Micha Bosshart - bmicha@ethz.ch}
+\title{Signals and Systems}
 
 \begin{document}
-\section{1. Section}
-	\input{src/1_section/1_subsection.tex}
+    \section{Matrix Exponential}
+        \vspace{-1em}
+        \begin{align*}
+            e^{At} &\vcentcolon= I + At + \frac{(At)^2}{2} + \cdots = \sum_{k=0}^\infty \frac{(At)^k}{k!} & \frac{d e^{At}}{dt} = Ae^{At}
+        \end{align*}
+    \section{CT to DT}
+        \input{CT-to-DT/ct-to-dt.tex}
+    \section{Discrete-Time LTI Systems}
+        \input{DT-LTI-Systems/main_file.tex}
+        \input{DT-LTI-Systems/LCCDE.tex}
+    \section{Frequency Domain Concepts}
+        \input{Frequency-Domain-Concepts/main_file.tex}
+        \input{Frequency-Domain-Concepts/z-Transform.tex}
+    \section{Discrete-Time Fourier Analysis}
+        \input{Discrete-Time-Fourier-Analysis/main.tex}
+        \input{Discrete-Time-Fourier-Analysis/DTFT.tex}
+        \input{Discrete-Time-Fourier-Analysis/DFS.tex}
+        \input{Discrete-Time-Fourier-Analysis/DFT.tex}
+    
+    \section{Filtering Basics}
+        \input{Filtering/white-noise.tex}
+        \input{Filtering/FIR-filters.tex}
+        \input{Filtering/IIR-filters.tex}
+    \section{Applied-Concepts}
+        \input{Applied-Concepts/applied-concepts.tex}
+    \section{System Identification}
+        \input{System-Identification/definitions.tex}
+        \input{System-Identification/impulse-response.tex}
+        \input{System-Identification/sinusoidal-inputs.tex}
+        \input{System-Identification/tf-id.tex}
 \end{document}

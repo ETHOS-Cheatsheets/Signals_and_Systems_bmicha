@@ -1,0 +1,83 @@
+% Various filter designs are achieved by transforming low-pass filters with appropriate transformations, applicable in CT or DT.
+
+\subsection{Median Filter}
+	The median filter of even order $M$ is defined as
+	\begin{align*}
+		y[n] &= \mathop{\text{median}}(u[n-M/2], \hdots, u[n],\hdots, u[n+M/2])
+	\end{align*}
+
+\subsection{High-Pass Filter Design}
+	\subsubsection{CT}
+		\textbf{Goal:} High-Pass with cutoff frequency $\omega_c$\\
+		1. Design low-pass $H_\text{LP}(s)$ with cutoff frequency $1/\omega_c$.\\
+		2. $H_\text{HP}(s) = H_\text{LP}(s^{-1})$
+		% Given a desired cutoff frequency $\omega_c$ for a high-pass filter, first design a low-pass filter $H_\text{LP}(s)$ with cutoff frequency $1/\omega_c$, and then calculate the transfer function of the corresponding high-pass filter as $H_\text{HP}(s) = H_\text{LP}(s^{-1})$
+
+	\subsubsection{DT}
+		\textbf{Goal:} High-Pass with cutoff frequency $\Omega_c$\\
+		1. Design low-pass $H_\text{LP}(z)$ with cutoff frequency $\pi - \Omega_c$.\\
+		2. $H_\text{HP}(z) = H_\text{LP}(-z)$
+		% Given a desired cutoff frequency $\Omega_c$ for a high-pass filter, first design a low-pass filter $H_\text{LP}(z)$ with cutoff frequency at $\pi-\Omega_c$ and calculate the transfer function of the corresponding high-pass filter as $H_\text{HP}(z) = H_\text{LP}(-z)$.
+
+\subsection{Band-Pass Filter Design}
+	\subsubsection{CT  \texorpdfstring{\hfill $\omega_0 \ll \omega_1$}{}}
+		% \textbf{Goal:} Band-Pass with corner frequencies $\omega_0 \ll \omega_1$\\
+		% Design $H_\text{LP}(s)$ and $H_\text{HP}(s)$ with $\omega_0$ and $\omega_1$ respectively.
+		\vspace{-0.5em}$$H_\text{BP}(s) = H_\text{LP}(s) \cdot H_\text{HP}(s)$$
+	\subsubsection{CT}
+		\textbf{Goal:} Band-Pass with corner frequencies $\omega_0 < \omega_1$\\
+		1. Design low-pass filter $H_\text{LP}(s)$ with $\omega_c = \omega_1-\omega_0$.\\
+		2. Transform $H_\text{LP}(s)$ using:
+		% In order to obtain a band-pass with corner frequencies $\omega_0 < \omega_1$, first design a low-pass filter $H_\text{LP}(s)$ with cutoff frequency $\omega_c = \omega_1-\omega_0$ and transform it using the transformation
+		\vspace{-0.5em}
+		\begin{align*}
+			s \to \frac{s^2+\omega_0\omega_1}{s}
+		\end{align*}
+
+\subsection{Band-Stop Filter Design}
+	\subsubsection{CT \texorpdfstring{\hfill $\omega_0 \ll \omega_1$}{w0 << w1}}
+		% \textbf{Assumption:} $\omega_0 \ll \omega_1$\\ 
+		% \textbf{Goal:} Band-Stop with corner frequencies $\omega_0 \ll \omega_1$\\
+		% 1. Design low-pass $H_\text{LP}(s)$ with cutoff frequency $\omega_0$.\\ 
+		% 2. Design high-pass $H_\text{HP}(s)$ with cutoff frequency $\omega_1$.\\ 
+		% Design $H_\text{LP}(s)$ and $H_\text{HP}(s)$ with $\omega_0$ and $\omega_1$ respectively.
+		\vspace{-0.5em}$$H_\text{BS}(s) = H_\text{LP}(s) + H_\text{HP}(s)$$
+		% Provided that $\omega_1\gg\omega_0$, design a low-pass filter $H_\text{LP}(s)$ at cutoff frequency $\omega_0$ and a high-pass filter $H_\text{HP}(s)$ at cutoff frequency $\omega_1$ and add them together to obtain a band-stop filter $H_\text{BS}(s) = H_\text{LP}(s) + H_\text{HP}(s)$.
+	\subsubsection{CT}
+		\textbf{Goal:} Band-Stop with corner frequencies $\omega_0 < \omega_1$\\
+		1. Design low-pass filter $H_\text{LP}(s)$ with $\omega_c = 1/(\omega_1-\omega_0)$.\\
+		2. Transform $H_\text{LP}(s)$ using:
+		% In order to obtain a band-pass with corner frequencies $\omega_0 < \omega_1$, first design a low-pass filter $H_\text{LP}(s)$ with cutoff frequency $\omega_c = \omega_1-\omega_0$ and transform it using the transformation
+		\vspace{-0.5em}
+		\begin{align*}
+			s \to \frac{s}{s^2+\omega_0\omega_1}
+		\end{align*}
+	\subsubsection{Second Order Notch Filter}
+		% Notch filters are band-stop filters with a very narrow stop band.
+		\vspace{-1em}
+		\begin{align*}
+			H_\text{NO}(s) &= \frac{s^2 + \omega_c^2}{s^2+\sqrt{2} \omega_c s + \omega_c^2}
+		\end{align*}
+
+\subsection{Bilinear Transform (BT)}
+	The BT converts CT to DT filter and vice versa.
+	\begin{align*}
+		s = \frac{2}{T_s}\left(\frac{z-1}{z+1}\right) && z = \frac{1+s\frac{T_s}{2}}{1-s\frac{T_s}{2}}
+	\end{align*}
+	Maps s-plane im. axis to z-plane unit circle. (Infinities at $-1$)\\
+	\textbf{BT frequency mapping}: \hfill 
+	$\omega \in (-\infty,\infty) \rightarrow \Omega \in (-\pi , \pi)$
+	\begin{align*}
+		\Omega = 2\arctan\left(\omega\frac{T_s}{2}\right) \underbrace{\approx \omega T_s}_{\omega T_s \lesssim 0.5}
+	\end{align*}
+	% It conserves stability and maps every point of the frequency response of the CT filter to a corresponding point of the frequency response of the DT filter, meaning that it doesn't alter gain and phase, only shifts the frequency of the feature.
+	\subsubsection{Frequency Prewarping}
+		% The bilinear transform preserves stability and maps the imaginary axis in the $s$-plane to the unit circle in the $z$-plane by compressing the CT frequencies $-\infty < \omega < \infty$ to DT frequencies $-\pi < \Omega < \pi$. We can calculate the mapping using
+		
+		BT frequency mapping only yields desired cutoff frequencies for small $\omega$. $\rightarrow$ Prewarp CT frequencies before applying BT.
+		\begin{enumerate}
+			\item Let $\omega_c$ be the desired CT corner frequency.
+			\item $\bar{\omega}_c = \frac{2}{T_s} \tan\left(\frac{\omega_c T_s}{2}\right)$
+			\item Design CT filter with $\bar{\omega}_c$ and obtain $H(s)$.
+			\item Apply BT to obtain DT filter $H(z)$ with $\Omega_c \approx \omega_c$.
+		\end{enumerate}
